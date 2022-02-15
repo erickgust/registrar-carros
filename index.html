@@ -1,13 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Cadastrar Carros</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
+    <form action="/" data-js="cars-form">
+      <label>
+        Imagem
+        <input type="url" name="image" data-js="image">
+      </label>
+
+      <label>
+        Marca / Modelo
+        <input type="text" name="model" data-js="model">
+      </label>
+
+      <label>
+        Ano
+        <input type="text" name="year" data-js="year">
+      </label>
+
+      <label>
+        Placa
+        <input type="text" name="plate" data-js="plate">
+      </label>
+
+      <label>
+        Cor
+        <input type="color" name="color" data-js="color">
+      </label>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+    <script type="module" src="main.js"></script>
   </body>
 </html>
