@@ -15,13 +15,12 @@ function createNewCar() {
   const $tdModel = document.createElement('td');
   const $tdYear = document.createElement('td');
   const $tdPlate = document.createElement('td');
-  const $tdColor = document.createElement('td');
+  const $tdColor = createColor();
   const $tdImage = createImage();
 
   $tdModel.textContent = getElement('model').value;
   $tdYear.textContent = getElement('year').value;
   $tdPlate.textContent = getElement('plate').value;
-  $tdColor.textContent = getElement('color').value;
 
   $tr.appendChild($tdImage);
   $tr.appendChild($tdModel);
@@ -41,4 +40,15 @@ function createImage() {
   $img.style.width = '100px';
 
   return $td.appendChild($img);
+}
+
+function createColor() {
+  const $td = document.createElement('td');
+  const $color = document.createElement('div');
+
+  $color.style.minWidth = '50px';
+  $color.style.minHeight = '50px';
+  $color.style.backgroundColor = getElement('color').value;
+
+  return $td.appendChild($color);
 }
