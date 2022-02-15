@@ -12,13 +12,12 @@ $form.addEventListener('submit', (event) => {
 
 function createNewCar() {
   const $tr = document.createElement('tr');
-  const $tdImage = document.createElement('td');
   const $tdModel = document.createElement('td');
   const $tdYear = document.createElement('td');
   const $tdPlate = document.createElement('td');
   const $tdColor = document.createElement('td');
+  const $tdImage = createImage();
 
-  $tdImage.textContent = getElement('image').value;
   $tdModel.textContent = getElement('model').value;
   $tdYear.textContent = getElement('year').value;
   $tdPlate.textContent = getElement('plate').value;
@@ -31,4 +30,15 @@ function createNewCar() {
   $tr.appendChild($tdColor);
 
   return $tr;
+}
+
+function createImage() {
+  const $td = document.createElement('td');
+  const $img = document.createElement('img');
+
+  $img.src = getElement('image').value;
+  $img.alt = getElement('model').value;
+  $img.style.width = '100px';
+
+  return $td.appendChild($img);
 }
