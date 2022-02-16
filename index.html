@@ -5,35 +5,41 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastrar Carros</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <form action="/" data-js="cars-form">
-      <label>
-        Imagem
-        <input type="url" name="image" data-js="image">
+    <header class="main-header">
+      <h1 class="title">Cadastrar Carros</h1>
+    </header>
+
+    <form action="/" data-js="cars-form" class="cars-form">
+      <label class="main-label">
+        <span class="text">Imagem</span>
+        <input type="url" name="image" data-js="image" class="input" required>
       </label>
 
-      <label>
-        Marca / Modelo
-        <input type="text" name="model" data-js="model">
+      <label class="main-label">
+        <span class="text">Marca / Modelo</span>
+        <input type="text" name="model" data-js="model" class="input" required>
       </label>
 
-      <label>
-        Ano
-        <input type="text" name="year" data-js="year">
+      <label class="main-label">
+        <span class="text">Ano</span>
+        <input type="text" name="year" data-js="year" class="input" required>
       </label>
 
-      <label>
-        Placa
-        <input type="text" name="plate" data-js="plate">
+      <label class="main-label">
+        <span class="text">Placa</span>
+        <input type="text" name="plate" data-js="plate" class="input" required>
       </label>
 
-      <label>
-        Cor
-        <input type="color" name="color" data-js="color">
+      <label class="main-label -color" data-js="label-color">
+        <span class="text">Cor</span>
+        <input type="color" name="color" data-js="color" class="color" required>
       </label>
 
-      <button type="submit">Cadastrar</button>
+      <button type="submit" class="main-button">Cadastrar</button>
     </form>
 
     <table>
