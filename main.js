@@ -8,6 +8,9 @@ $form.addEventListener('submit', (event) => {
   event.preventDefault();
   const $tableCar = getElement('table-car');
   $tableCar.appendChild(createNewCar());
+
+  event.target.reset();
+  event.target.elements[0].focus();
 });
 
 function createNewCar() {
