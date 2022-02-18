@@ -10,6 +10,12 @@ body {
   background-color: #EBEBEB;
 }
 
+.main-wrapper {
+  display: flex;
+  padding: 50px;
+  justify-content: space-around;
+}
+
 .main-header {
   display: flex;
   height: 90px;
@@ -25,12 +31,10 @@ body {
 }
 
 .cars-form {
-  padding: 50px;
-  margin-top: 60px;
   display: flex;
   flex-direction: column;
-  max-width: 400px;
   gap: 20px;
+  min-width: 300px;
 }
 
 .main-label > .text {
@@ -62,6 +66,7 @@ body {
   width: fit-content;
   border-radius: 5px;
   border: 1px solid #999999;
+  overflow: hidden;
 }
 
 .main-label.-color > .text {
@@ -103,4 +108,31 @@ body {
 
 .main-button:hover {
   background-color: #BD0F32;
+}
+
+.cars-table {
+  min-width: 600px;
+  border-spacing: 0;
+  background-color: #FFF;
+  border: 1px solid #999999;
+  border-radius: 5px;
+  overflow: hidden;
+  align-self: start;
+}
+
+.cars-table > thead {
+  background-color: #222222;
+  color: #FFF;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.table-row:nth-child(2n) {
+  background-color: #EBEBEB;
+}
+
+.table-row > th,
+.table-row > td {
+  padding: 10px 15px;
+  text-align: center;
 }

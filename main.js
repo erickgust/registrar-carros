@@ -25,6 +25,8 @@ function createNewCar() {
   $tdYear.textContent = getElement('year').value;
   $tdPlate.textContent = getElement('plate').value;
 
+  $tr.classList.add('table-row');
+
   $tr.appendChild($tdImage);
   $tr.appendChild($tdModel);
   $tr.appendChild($tdYear);
@@ -42,16 +44,20 @@ function createImage() {
   $img.alt = getElement('model').value;
   $img.style.width = '100px';
 
-  return $td.appendChild($img);
+  $td.appendChild($img)
+  return $td;
 }
 
 function createColor() {
   const $td = document.createElement('td');
   const $color = document.createElement('div');
 
-  $color.style.minWidth = '50px';
-  $color.style.minHeight = '50px';
+  $color.style.width = '50px';
+  $color.style.height = '50px';
+  $color.style.borderRadius = '5px';
+  $color.style.margin = 'auto';
   $color.style.backgroundColor = getElement('color').value;
 
-  return $td.appendChild($color);
+  $td.appendChild($color);
+  return $td;
 }
