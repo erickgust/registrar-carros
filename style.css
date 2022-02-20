@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-color: #EBEBEB;
+  background-color: var(--light-gray-color);
 }
 
 .main-wrapper {
@@ -19,15 +17,15 @@ body {
 .main-header {
   display: flex;
   height: 90px;
-  background-color: #222222;
+  background-color: var(--black-color);
   justify-content: center;
   align-items: center;
 }
 
 .main-header .title {
-  color: #FFF;
-  font-size: 36px;
-  font-weight: 700;
+  color: var(--white-color);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-bold);
 }
 
 .cars-form {
@@ -39,33 +37,33 @@ body {
 
 .main-label > .text {
   display: block;
-  font-size: 18px;
-  font-weight: 500;
-  color: #222222;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-medium);
+  color: var(--black-color);
   margin-bottom: 5px;
 }
 
 .main-label > .input {
-  width: 100%;
-  color: #222222;
   display: block;
+  width: 100%;
   padding: 10px 15px;
-  border-radius: 5px;
-  border: 1px solid #999999;
+  color: var(--black-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray-color);
 }
 
 .main-label > .input:focus {
   border-color: transparent;
-  outline: 2px solid #ED254E;
+  outline: 2px solid var(--primary-color);
 }
 
 .main-label.-color {
   display: flex;
   align-items: center;
-  background-color: #FFF;
   width: fit-content;
-  border-radius: 5px;
-  border: 1px solid #999999;
+  background-color: var(--white-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray-color);
   overflow: hidden;
 }
 
@@ -93,13 +91,13 @@ body {
 }
 
 .main-button {
-  font-weight: 700;
-  color: #FFF;
-  background-color: #ED254E;
   border: none;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-bold);
   padding: 10px;
-  border-radius: 5px;
-  font-size: 18px;
   min-width: 150px;
   align-self: center;
   cursor: pointer;
@@ -107,28 +105,31 @@ body {
 }
 
 .main-button:hover {
-  background-color: #BD0F32;
+  background-color: var(--btn-hover-color);
 }
 
 .cars-table {
   min-width: 600px;
   border-spacing: 0;
-  background-color: #FFF;
-  border: 1px solid #999999;
-  border-radius: 5px;
+  background-color: var(--white-color);
+  border: 1px solid var(--gray-color);
+  border-radius: var(--border-radius);
   overflow: hidden;
   align-self: start;
 }
 
 .cars-table > thead {
-  background-color: #222222;
-  color: #FFF;
-  font-weight: 500;
-  font-size: 18px;
+  background-color: var(--black-color);
+  color: var(--white-color);
+}
+
+.table-row > th {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-medium);
 }
 
 .table-row:nth-child(2n) {
-  background-color: #EBEBEB;
+  background-color: var(--light-gray-color);
 }
 
 .table-row > th,
