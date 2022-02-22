@@ -7,27 +7,36 @@ function getElement(elementName) {
 
 $form.addEventListener('submit', (event) => {
   event.preventDefault();
-  $tableCar.appendChild(createNewCar());
+
+  const data = {
+    image: getElement('image').value,
+    model: getElement('model').value,
+    year: getElement('year').value,
+    plate: getElement('plate').value,
+    color: getElement('color').value,
+  };
+
+  $tableCar.appendChild(createNewCar(data));
 
   event.target.reset();
   event.target.elements[0].focus();
 });
 
-function createNewCar() {
+function createNewCar(data) {
   const $tr = document.createElement('tr');
   const $tdModel = document.createElement('td');
   const $tdYear = document.createElement('td');
   const $tdPlate = document.createElement('td');
-  const $tdColor = createColor();
-  const $tdImage = createImage();
+  const $tdColor = createColor(data.color);
+  const $tdImage = createImage(data.image, data.plate);
   const $button = createDeleteButton();
 
-  $tdModel.textContent = getElement('model').value;
-  $tdYear.textContent = getElement('year').value;
-  $tdPlate.textContent = getElement('plate').value;
+  $tdModel.textContent = data.model;
+  $tdYear.textContent = data.year;
+  $tdPlate.textContent = data.plate;
 
   $tr.classList.add('table-row');
-  $tr.dataset.plate = getElement('plate').value;
+  $tr.dataset.plate = data.plate;
 
   $tr.appendChild($tdImage);
   $tr.appendChild($tdModel);
@@ -41,19 +50,19 @@ function createNewCar() {
   return $tr;
 }
 
-function createImage() {
+function createImage(src, alt) {
   const $td = document.createElement('td');
   const $img = document.createElement('img');
 
-  $img.src = getElement('image').value;
-  $img.alt = getElement('model').value;
+  $img.src = src;
+  $img.alt = alt;
   $img.style.width = '100px';
 
   $td.appendChild($img)
   return $td;
 }
 
-function createColor() {
+function createColor(bgColor) {
   const $td = document.createElement('td');
   const $color = document.createElement('div');
 
@@ -61,7 +70,7 @@ function createColor() {
   $color.style.height = '50px';
   $color.style.borderRadius = '5px';
   $color.style.margin = 'auto';
-  $color.style.backgroundColor = getElement('color').value;
+  $color.style.backgroundColor = bgColor;
 
   $td.appendChild($color);
   return $td;
