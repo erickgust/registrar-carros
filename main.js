@@ -1,9 +1,10 @@
 const $form = getElement('cars-form');
 const $tableCar = getElement('table-car');
-
-function getElement(elementName) {
-  return document.querySelector(`[data-js="${elementName}"]`);
-}
+const elementTypes = {
+  text: createText,
+  image: createImage,
+  color: createColor
+};
 
 $form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -22,23 +23,28 @@ $form.addEventListener('submit', (event) => {
   event.target.elements[0].focus();
 });
 
+function getElement(elementName) {
+  return document.querySelector(`[data-js="${elementName}"]`);
+}
+
 function createNewCar(data) {
   const $tr = document.createElement('tr');
-  const $tdModel = createText(data.model);
-  const $tdYear = createText(data.year);
-  const $tdPlate = createText(data.plate);
-  const $tdColor = createColor(data.color);
-  const $tdImage = createImage(data.image, data.plate);
+  const elements = [
+    {type: 'image', value: {src: data.image, alt: data.model}},
+    {type: 'text', value: data.model},
+    {type: 'text', value: data.year},
+    {type: 'text', value: data.plate},
+    {type: 'color', value: data.color},
+  ];
   const $button = createDeleteButton();
+
+  elements.forEach(element => {
+    const td = elementTypes[element.type](element.value);
+    $tr.appendChild(td);
+  });
 
   $tr.classList.add('table-row');
   $tr.dataset.plate = data.plate;
-
-  $tr.appendChild($tdImage);
-  $tr.appendChild($tdModel);
-  $tr.appendChild($tdYear);
-  $tr.appendChild($tdPlate);
-  $tr.appendChild($tdColor);
 
   $tr.appendChild($button);
   $button.addEventListener('click', handleDelete);
@@ -53,7 +59,7 @@ function createText(value) {
   return $td;
 }
 
-function createImage(src, alt) {
+function createImage({ src, alt }) {
   const $td = document.createElement('td');
   const $img = document.createElement('img');
 
@@ -65,7 +71,7 @@ function createImage(src, alt) {
   return $td;
 }
 
-function createColor(bgColor) {
+function createColor(value) {
   const $td = document.createElement('td');
   const $color = document.createElement('div');
 
@@ -73,7 +79,7 @@ function createColor(bgColor) {
   $color.style.height = '50px';
   $color.style.borderRadius = '5px';
   $color.style.margin = 'auto';
-  $color.style.backgroundColor = bgColor;
+  $color.style.backgroundColor = value;
 
   $td.appendChild($color);
   return $td;
