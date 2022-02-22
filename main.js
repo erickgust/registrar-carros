@@ -24,16 +24,12 @@ $form.addEventListener('submit', (event) => {
 
 function createNewCar(data) {
   const $tr = document.createElement('tr');
-  const $tdModel = document.createElement('td');
-  const $tdYear = document.createElement('td');
-  const $tdPlate = document.createElement('td');
+  const $tdModel = createText(data.model);
+  const $tdYear = createText(data.year);
+  const $tdPlate = createText(data.plate);
   const $tdColor = createColor(data.color);
   const $tdImage = createImage(data.image, data.plate);
   const $button = createDeleteButton();
-
-  $tdModel.textContent = data.model;
-  $tdYear.textContent = data.year;
-  $tdPlate.textContent = data.plate;
 
   $tr.classList.add('table-row');
   $tr.dataset.plate = data.plate;
@@ -48,6 +44,13 @@ function createNewCar(data) {
   $button.addEventListener('click', handleDelete);
 
   return $tr;
+}
+
+function createText(value) {
+  const $td = document.createElement('td');
+  $td.textContent = value;
+
+  return $td;
 }
 
 function createImage(src, alt) {
