@@ -29,6 +29,7 @@ function getElement(elementName) {
 
 function createNewCar(data) {
   const $tr = document.createElement('tr');
+  const $button = createDeleteButton(data.plate);
   const elements = [
     {type: 'image', value: {src: data.image, alt: data.model}},
     {type: 'text', value: data.model},
@@ -36,7 +37,6 @@ function createNewCar(data) {
     {type: 'text', value: data.plate},
     {type: 'color', value: data.color},
   ];
-  const $button = createDeleteButton();
 
   elements.forEach(element => {
     const td = elementTypes[element.type](element.value);
@@ -85,9 +85,9 @@ function createColor(value) {
   return $td;
 }
 
-function createDeleteButton() {
+function createDeleteButton(plate) {
   const $button = document.createElement('button');
-  $button.dataset.plate = getElement('plate').value;
+  $button.dataset.plate = plate;
   $button.textContent = 'Delete';
 
   return $button;
