@@ -44,8 +44,6 @@ function createNewCar(data) {
   });
 
   $tr.classList.add('table-row');
-  $tr.dataset.plate = data.plate;
-
   $tr.appendChild($button);
   $button.addEventListener('click', handleDelete);
 
@@ -94,8 +92,7 @@ function createDeleteButton(plate) {
 }
 
 function handleDelete({ target }) {
-  const plate = target.dataset.plate;
-  const $tr = document.querySelector(`tr[data-plate="${plate}"]`);
+  const $tr = target.parentElement;
 
   $tableCar.removeChild($tr);
   target.removeEventListener('click', handleDelete);
