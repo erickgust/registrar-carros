@@ -1,5 +1,6 @@
 const $form = getElement('cars-form');
 const $tableCar = getElement('table-car');
+const url = 'http://localhost:3000/car';
 const elementTypes = {
   text: createText,
   image: createImage,
@@ -11,13 +12,14 @@ $form.addEventListener('submit', (event) => {
 
   const data = {
     image: getElement('image').value,
-    model: getElement('model').value,
+    brandModel: getElement('model').value,
     year: getElement('year').value,
     plate: getElement('plate').value,
     color: getElement('color').value,
   };
 
-  $tableCar.appendChild(createNewCar(data));
+  sendCarData(data);
+  createNewCar(data);
 
   event.target.reset();
   event.target.elements[0].focus();
@@ -27,12 +29,38 @@ function getElement(elementName) {
   return document.querySelector(`[data-js="${elementName}"]`);
 }
 
+function sendCarData(data) {
+  const post = new XMLHttpRequest();
+  post.open('POST', url);
+  post.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  post.send(`image=${data.image}&brandModel=${data.brandModel}&year=${data.year}&plate=${data.plate}&color=${data.color}`);
+
+  post.addEventListener('readystatechange', () => {
+    if(isRequestOk(post))
+      return JSON.parse(post.responseText);
+  });
+}
+
+function getCarData() {
+  const get = new XMLHttpRequest();
+  get.open('GET', url);
+  get.send();
+  get.addEventListener('readystatechange', () => {
+    if(isRequestOk(get))
+      JSON.parse(get.responseText).forEach(createNewCar);
+  });
+}
+
+function isRequestOk(request) {
+  return request.readyState === 4 && request.status === 200;
+}
+
 function createNewCar(data) {
   const $tr = document.createElement('tr');
   const $button = createDeleteButton(data.plate);
   const elements = [
-    {type: 'image', value: {src: data.image, alt: data.model}},
-    {type: 'text', value: data.model},
+    {type: 'image', value: {src: data.image, alt: data.brandModel}},
+    {type: 'text', value: data.brandModel},
     {type: 'text', value: data.year},
     {type: 'text', value: data.plate},
     {type: 'color', value: data.color},
@@ -46,14 +74,13 @@ function createNewCar(data) {
   $tr.classList.add('table-row');
   $tr.appendChild($button);
   $button.addEventListener('click', handleDelete);
-
-  return $tr;
+  $tableCar.appendChild($tr);
+  return $tableCar;
 }
 
 function createText(value) {
   const $td = document.createElement('td');
   $td.textContent = value;
-
   return $td;
 }
 
@@ -87,13 +114,13 @@ function createDeleteButton(plate) {
   const $button = document.createElement('button');
   $button.dataset.plate = plate;
   $button.textContent = 'Delete';
-
   return $button;
 }
 
 function handleDelete({ target }) {
   const $tr = target.parentElement;
-
   $tableCar.removeChild($tr);
   target.removeEventListener('click', handleDelete);
 }
+
+getCarData();
