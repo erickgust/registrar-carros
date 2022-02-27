@@ -119,8 +119,23 @@ function createDeleteButton(plate) {
 
 function handleDelete({ target }) {
   const $tr = target.parentElement;
+  const plate = target.dataset.plate;
+  sendDeleteRequest(plate);
   $tableCar.removeChild($tr);
   target.removeEventListener('click', handleDelete);
+}
+
+function sendDeleteRequest(plate) {
+  const del = new XMLHttpRequest();
+  del.open('DELETE', url);
+  del.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  del.send(`plate=${plate}`);
+
+  del.addEventListener('readystatechange', () => {
+    if (isRequestOk(del)) {
+      return del.responseText;
+    }
+  });
 }
 
 getCarData();
