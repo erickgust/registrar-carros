@@ -101,6 +101,7 @@ function createColor(value) {
 
 function createDeleteButton(plate) {
   const $button = document.createElement('button');
+  $button.classList.add('main-button', '-del');
   $button.dataset.plate = plate;
   $button.textContent = 'Delete';
   return $button;

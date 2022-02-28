@@ -98,7 +98,8 @@ body {
   font-size: var(--font-size-normal);
   font-weight: var(--font-bold);
   padding: 10px;
-  min-width: 150px;
+  max-width: 150px;
+  width: 100%;
   align-self: center;
   cursor: pointer;
   transition: background-color 100ms ease-in;
@@ -136,4 +137,9 @@ body {
 .table-row > td {
   padding: 10px 15px;
   text-align: center;
+}
+
+.table-row > .main-button.-del {
+  max-width: fit-content;
+  height: 40px;
 }
