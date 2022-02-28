@@ -32,8 +32,8 @@ function getElement(elementName) {
 function sendCarData(data) {
   const post = new XMLHttpRequest();
   post.open('POST', url);
-  post.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  post.send(`image=${data.image}&brandModel=${data.brandModel}&year=${data.year}&plate=${data.plate}&color=${data.color}`);
+  post.setRequestHeader('Content-Type', 'application/json');
+  post.send(JSON.stringify(data));
 
   post.addEventListener('readystatechange', () => {
     if(isRequestOk(post))
@@ -128,8 +128,8 @@ function handleDelete({ target }) {
 function sendDeleteRequest(plate) {
   const del = new XMLHttpRequest();
   del.open('DELETE', url);
-  del.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  del.send(`plate=${plate}`);
+  del.setRequestHeader('Content-Type', 'application/json');
+  del.send(JSON.stringify({ plate }));
 
   del.addEventListener('readystatechange', () => {
     if (isRequestOk(del)) {
