@@ -10,6 +10,7 @@ const elementTypes = {
 $form.addEventListener('submit', (event) => {
   event.preventDefault();
 
+  const post = sendRequest('POST');
   const data = {
     image: getElement('image').value,
     brandModel: getElement('model').value,
@@ -18,7 +19,7 @@ $form.addEventListener('submit', (event) => {
     color: getElement('color').value,
   };
 
-  sendCarData(data);
+  post(url, data);
   createNewCar(data);
 
   event.target.reset();
@@ -27,18 +28,6 @@ $form.addEventListener('submit', (event) => {
 
 function getElement(elementName) {
   return document.querySelector(`[data-js="${elementName}"]`);
-}
-
-function sendCarData(data) {
-  const post = new XMLHttpRequest();
-  post.open('POST', url);
-  post.setRequestHeader('Content-Type', 'application/json');
-  post.send(JSON.stringify(data));
-
-  post.addEventListener('readystatechange', () => {
-    if(isRequestOk(post))
-      return JSON.parse(post.responseText);
-  });
 }
 
 function getCarData() {
@@ -120,22 +109,24 @@ function createDeleteButton(plate) {
 function handleDelete({ target }) {
   const $tr = target.parentElement;
   const plate = target.dataset.plate;
-  sendDeleteRequest(plate);
+  const del = sendRequest('DELETE');
+  del(url, { plate });
   $tableCar.removeChild($tr);
   target.removeEventListener('click', handleDelete);
 }
 
-function sendDeleteRequest(plate) {
-  const del = new XMLHttpRequest();
-  del.open('DELETE', url);
-  del.setRequestHeader('Content-Type', 'application/json');
-  del.send(JSON.stringify({ plate }));
+function sendRequest(method) {
+  return (url, data) => {
+    const request = new XMLHttpRequest();
+    request.open(method, url);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(JSON.stringify(data));
 
-  del.addEventListener('readystatechange', () => {
-    if (isRequestOk(del)) {
-      return del.responseText;
-    }
-  });
+    request.addEventListener('load', () => {
+      if (isRequestOk(request))
+        return request.responseText;
+    });
+  };
 }
 
 getCarData();
