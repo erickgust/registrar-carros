@@ -4,7 +4,8 @@ const url = 'http://localhost:3000/car';
 const elementTypes = {
   text: createText,
   image: createImage,
-  color: createColor
+  color: createColor,
+  button: createDeleteButton
 };
 
 $form.addEventListener('submit', (event) => {
@@ -46,13 +47,13 @@ function isRequestOk(request) {
 
 function createNewCar(data) {
   const $tr = document.createElement('tr');
-  const $button = createDeleteButton(data.plate);
   const elements = [
     {type: 'image', value: {src: data.image, alt: data.brandModel}},
     {type: 'text', value: data.brandModel},
     {type: 'text', value: data.year},
     {type: 'text', value: data.plate},
     {type: 'color', value: data.color},
+    {type: 'button', value: data.plate},
   ];
 
   elements.forEach(element => {
@@ -61,8 +62,6 @@ function createNewCar(data) {
   });
 
   $tr.classList.add('table-row');
-  $tr.appendChild($button);
-  $button.addEventListener('click', handleDelete);
   $tableCar.appendChild($tr);
   return $tableCar;
 }
@@ -100,15 +99,20 @@ function createColor(value) {
 }
 
 function createDeleteButton(plate) {
+  const $td = document.createElement('td');
   const $button = document.createElement('button');
-  $button.classList.add('main-button', '-del');
+
+  $button.classList.add('main-button');
   $button.dataset.plate = plate;
   $button.textContent = 'Delete';
-  return $button;
+  $button.addEventListener('click', handleDelete);
+
+  $td.appendChild($button);
+  return $td;
 }
 
 function handleDelete({ target }) {
-  const $tr = target.parentElement;
+  const $tr = target.closest('tr');
   const plate = target.dataset.plate;
   const del = sendRequest('DELETE');
   del(url, { plate });

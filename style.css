@@ -138,8 +138,3 @@ body {
   padding: 10px 15px;
   text-align: center;
 }
-
-.table-row > .main-button.-del {
-  max-width: fit-content;
-  height: 40px;
-}
