@@ -56,6 +56,7 @@ function createNewCar(data) {
     {type: 'button', value: data.plate},
   ];
 
+  removeNoCarRow();
   elements.forEach(element => {
     const td = elementTypes[element.type](element.value);
     $tr.appendChild(td);
@@ -115,8 +116,13 @@ function handleDelete({ target }) {
   const $tr = target.closest('tr');
   const plate = target.dataset.plate;
   const del = sendRequest('DELETE');
+
   del(url, { plate });
   $tableCar.removeChild($tr);
+
+  const hasTr = $tableCar.querySelector('tr');
+  if(!hasTr) createNoCarRow();
+
   target.removeEventListener('click', handleDelete);
 }
 
@@ -134,4 +140,23 @@ function sendRequest(method) {
   };
 }
 
+function createNoCarRow() {
+  const $td = document.createElement('td');
+  const $tr = document.createElement('tr');
+  const thsLength = document.querySelectorAll('table th').length;
+  $td.setAttribute('colspan', thsLength);
+  $td.style.textAlign = 'center';
+  $td.textContent = 'Sem conteúdo';
+  $tr.dataset.js = 'no-car';
+  $tr.appendChild($td);
+  $tableCar.appendChild($tr);
+}
+
+function removeNoCarRow() {
+  const $noCarRow = getElement('no-car');
+  if($noCarRow)
+    $tableCar.removeChild($noCarRow);
+}
+
+createNoCarRow();
 getCarData();
