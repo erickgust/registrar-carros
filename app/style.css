@@ -138,3 +138,21 @@ body {
   padding: 10px 15px;
   text-align: center;
 }
+
+.no-car {
+  text-align: center;
+  height: 400px;
+}
+
+.no-car > td > img {
+  width: 300px;
+}
+
+.no-car > td::after {
+  content: 'Nenhum carro registrado';
+  display: block;
+  margin-top: 25px;
+  font-weight: var(--font-regular);
+  font-size: var(--font-size-normal);
+  color: var(--black-color);
+}

@@ -141,12 +141,17 @@ function sendRequest(method) {
 }
 
 function createNoCarRow() {
+  const $img = document.createElement('img');
   const $td = document.createElement('td');
   const $tr = document.createElement('tr');
   const thsLength = document.querySelectorAll('table th').length;
+
+  $img.src = 'src/img/off_road.svg';
+  $img.alt = 'Carro fora da estrada';
+  $td.appendChild($img);
   $td.setAttribute('colspan', thsLength);
-  $td.style.textAlign = 'center';
-  $td.textContent = 'Sem conteúdo';
+
+  $tr.classList.add('no-car');
   $tr.dataset.js = 'no-car';
   $tr.appendChild($td);
   $tableCar.appendChild($tr);
