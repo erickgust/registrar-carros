@@ -16,14 +16,14 @@ router.post('/', function(req, res) {
     plate: req.body.plate,
     color: req.body.color
   });
-  res.json({ message: 'success' });
+  res.json({ message: `O carro com a placa ${req.body.plate} foi cadastrado com sucesso`});
 });
 
 router.delete('/', function(req, res) {
   data = data.filter(function(car) {
     return car.plate !== req.body.plate;
   });
-  res.json({ message: 'success' });
+  res.json({ message: `O carro com a placa ${req.body.plate} foi removido com sucesso` });
 });
 
 module.exports = router;
