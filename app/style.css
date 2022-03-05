@@ -171,10 +171,12 @@ body {
   padding: 10px 20px;
   border-radius: var(--border-radius);
 
+  visibility: hidden;
   opacity: 0;
   transition: all 1.5s cubic-bezier(.18,.89,.32,1.28);
 }
 
 .toast.-show {
+  visibility: visible;
   opacity: 1;
 }
