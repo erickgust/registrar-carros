@@ -147,9 +147,12 @@ function createToastMessage({ message }) {
   $div.classList.add('-show');
   $div.textContent = message;
 
-  $div.addEventListener('transitionend', ({ target }) => {
-    target.classList.remove('-show');
-  });
+  $div.addEventListener('transitionend', removeTransition);
+}
+
+function removeTransition({ target }) {
+  target.classList.remove('-show');
+  target.removeEventListener('transitionend', removeTransition);
 }
 
 function createNoCarRow() {
