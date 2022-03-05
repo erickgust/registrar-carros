@@ -134,10 +134,22 @@ function sendRequest(method) {
     request.send(JSON.stringify(data));
 
     request.addEventListener('load', () => {
-      if (isRequestOk(request))
-        return request.responseText;
+      if (isRequestOk(request)) {
+        const response = JSON.parse(request.responseText);
+        createToastMessage(response);
+      }
     });
   };
+}
+
+function createToastMessage({ message }) {
+  const $div = getElement('toast');
+  $div.classList.add('-show');
+  $div.textContent = message;
+
+  $div.addEventListener('transitionend', ({ target }) => {
+    target.classList.remove('-show');
+  });
 }
 
 function createNoCarRow() {

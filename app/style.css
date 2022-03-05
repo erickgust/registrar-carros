@@ -156,3 +156,25 @@ body {
   font-size: var(--font-size-normal);
   color: var(--black-color);
 }
+
+.toast {
+  text-align: center;
+  position: fixed;
+  inset-block-end: 30px;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+
+  background-color: #10A81F;
+  color: var(--white-color);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-medium);
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+
+  opacity: 0;
+  transition: all 1.5s cubic-bezier(.18,.89,.32,1.28);
+}
+
+.toast.-show {
+  opacity: 1;
+}
