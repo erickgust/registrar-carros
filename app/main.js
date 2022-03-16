@@ -35,14 +35,14 @@ function getCarData() {
   const get = new XMLHttpRequest();
   get.open('GET', url);
   get.send();
-  get.addEventListener('readystatechange', () => {
+  get.addEventListener('load', () => {
     if(isRequestOk(get))
-      JSON.parse(get.responseText).forEach(createNewCar);
+    JSON.parse(get.response).forEach(createNewCar);
   });
 }
 
 function isRequestOk(request) {
-  return request.readyState === 4 && request.status === 200;
+  return request.status === 200;
 }
 
 function createNewCar(data) {
@@ -135,7 +135,7 @@ function sendRequest(method) {
 
     request.addEventListener('load', () => {
       if (isRequestOk(request)) {
-        const response = JSON.parse(request.responseText);
+        const response = JSON.parse(request.response);
         createToastMessage(response);
       }
     });
